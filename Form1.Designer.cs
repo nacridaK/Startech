@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.contextMenuStrip_harita = new System.Windows.Forms.ContextMenuStrip();
+            this.components = new System.ComponentModel.Container();
+            this.contextMenuStrip_harita = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_harita_başlık = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator_ayıraç1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_işarethızlıekle = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_işaretekle = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip_işaret = new System.Windows.Forms.ContextMenuStrip();
+            this.toolStripComboBox_simge = new System.Windows.Forms.ToolStripComboBox();
+            this.contextMenuStrip_işaret = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_işaret_başlık = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator_ayıraç2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_işaretsil = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_işaretler = new System.Windows.Forms.GroupBox();
-            this.listBox_işaretler = new System.Windows.Forms.ListBox();
+            this.dataGridView_işaretler = new System.Windows.Forms.DataGridView();
             this.groupBox_ayarlar = new System.Windows.Forms.GroupBox();
             this.comboBox_sağlayıcılar = new System.Windows.Forms.ComboBox();
             this.label_mod = new System.Windows.Forms.Label();
@@ -58,10 +60,11 @@
             this.toolStripStatusLabel_durum = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip_harita = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_imleç = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripComboBox_simge = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripMenuItem_simge = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_harita.SuspendLayout();
             this.contextMenuStrip_işaret.SuspendLayout();
             this.groupBox_işaretler.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_işaretler)).BeginInit();
             this.groupBox_ayarlar.SuspendLayout();
             this.groupBox_koordinatlar.SuspendLayout();
             this.groupBox_harita.SuspendLayout();
@@ -77,7 +80,7 @@
             this.toolStripMenuItem_işarethızlıekle});
             this.contextMenuStrip_harita.Name = "contextMenuStrip1";
             this.contextMenuStrip_harita.ShowImageMargin = false;
-            this.contextMenuStrip_harita.Size = new System.Drawing.Size(128, 54);
+            this.contextMenuStrip_harita.Size = new System.Drawing.Size(128, 76);
             // 
             // toolStripMenuItem_harita_başlık
             // 
@@ -95,6 +98,7 @@
             // 
             this.toolStripMenuItem_işarethızlıekle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_işaretekle,
+            this.toolStripMenuItem_simge,
             this.toolStripComboBox_simge});
             this.toolStripMenuItem_işarethızlıekle.Name = "toolStripMenuItem_işarethızlıekle";
             this.toolStripMenuItem_işarethızlıekle.Size = new System.Drawing.Size(127, 22);
@@ -107,6 +111,51 @@
             this.toolStripMenuItem_işaretekle.Size = new System.Drawing.Size(181, 22);
             this.toolStripMenuItem_işaretekle.Text = "İşaret Ekle";
             this.toolStripMenuItem_işaretekle.Click += new System.EventHandler(this.toolStripMenuItem_işaretekle_Click);
+            // 
+            // toolStripComboBox_simge
+            // 
+            this.toolStripComboBox_simge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox_simge.Items.AddRange(new object[] {
+            "none",
+            "arrow",
+            "blue",
+            "blue_small",
+            "blue_dot",
+            "blue_pushpin",
+            "brown_small",
+            "gray_small",
+            "green",
+            "green_small",
+            "green_dot",
+            "green_pushpin",
+            "green_big_go",
+            "yellow",
+            "yellow_small",
+            "yellow_dot",
+            "yellow_big_pause",
+            "yellow_pushpin",
+            "lightblue",
+            "lightblue_dot",
+            "lightblue_pushpin",
+            "orange",
+            "orange_small",
+            "orange_dot",
+            "pink",
+            "pink_dot",
+            "pink_pushpin",
+            "purple",
+            "purple_small",
+            "purple_dot",
+            "purple_pushpin",
+            "red ",
+            "red_small",
+            "red_dot",
+            "red_pushpin",
+            "red_big_stop",
+            "black_small",
+            "white_small"});
+            this.toolStripComboBox_simge.Name = "toolStripComboBox_simge";
+            this.toolStripComboBox_simge.Size = new System.Drawing.Size(121, 23);
             // 
             // contextMenuStrip_işaret
             // 
@@ -140,22 +189,22 @@
             // 
             // groupBox_işaretler
             // 
-            this.groupBox_işaretler.Controls.Add(this.listBox_işaretler);
+            this.groupBox_işaretler.Controls.Add(this.dataGridView_işaretler);
             this.groupBox_işaretler.Location = new System.Drawing.Point(589, 138);
             this.groupBox_işaretler.Name = "groupBox_işaretler";
-            this.groupBox_işaretler.Size = new System.Drawing.Size(336, 119);
+            this.groupBox_işaretler.Size = new System.Drawing.Size(583, 285);
             this.groupBox_işaretler.TabIndex = 23;
             this.groupBox_işaretler.TabStop = false;
             this.groupBox_işaretler.Text = "İşaretler";
             // 
-            // listBox_işaretler
+            // dataGridView_işaretler
             // 
-            this.listBox_işaretler.FormattingEnabled = true;
-            this.listBox_işaretler.Location = new System.Drawing.Point(6, 18);
-            this.listBox_işaretler.Name = "listBox_işaretler";
-            this.listBox_işaretler.Size = new System.Drawing.Size(324, 95);
-            this.listBox_işaretler.TabIndex = 16;
-            this.listBox_işaretler.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox_işaretler_MouseDoubleClick);
+            this.dataGridView_işaretler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_işaretler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_işaretler.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView_işaretler.Name = "dataGridView_işaretler";
+            this.dataGridView_işaretler.Size = new System.Drawing.Size(577, 266);
+            this.dataGridView_işaretler.TabIndex = 26;
             // 
             // groupBox_ayarlar
             // 
@@ -331,9 +380,9 @@
             // 
             this.statusStrip_durum.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_durum});
-            this.statusStrip_durum.Location = new System.Drawing.Point(0, 446);
+            this.statusStrip_durum.Location = new System.Drawing.Point(0, 505);
             this.statusStrip_durum.Name = "statusStrip_durum";
-            this.statusStrip_durum.Size = new System.Drawing.Size(929, 22);
+            this.statusStrip_durum.Size = new System.Drawing.Size(1184, 22);
             this.statusStrip_durum.TabIndex = 24;
             // 
             // toolStripStatusLabel_durum
@@ -346,9 +395,9 @@
             // 
             this.statusStrip_harita.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel_imleç});
-            this.statusStrip_harita.Location = new System.Drawing.Point(0, 424);
+            this.statusStrip_harita.Location = new System.Drawing.Point(0, 483);
             this.statusStrip_harita.Name = "statusStrip_harita";
-            this.statusStrip_harita.Size = new System.Drawing.Size(929, 22);
+            this.statusStrip_harita.Size = new System.Drawing.Size(1184, 22);
             this.statusStrip_harita.SizingGrip = false;
             this.statusStrip_harita.TabIndex = 25;
             // 
@@ -358,63 +407,25 @@
             this.toolStripStatusLabel_imleç.Size = new System.Drawing.Size(101, 17);
             this.toolStripStatusLabel_imleç.Text = "İmleçin Konumu: ";
             // 
-            // toolStripComboBox_simge
+            // toolStripMenuItem_simge
             // 
-            this.toolStripComboBox_simge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBox_simge.Items.AddRange(new object[] {
-            "none",
-            "arrow",
-            "blue",
-            "blue_small",
-            "blue_dot",
-            "blue_pushpin",
-            "brown_small",
-            "gray_small",
-            "green",
-            "green_small",
-            "green_dot",
-            "green_pushpin",
-            "green_big_go",
-            "yellow",
-            "yellow_small",
-            "yellow_dot",
-            "yellow_big_pause",
-            "yellow_pushpin",
-            "lightblue",
-            "lightblue_dot",
-            "lightblue_pushpin",
-            "orange",
-            "orange_small",
-            "orange_dot",
-            "pink",
-            "pink_dot",
-            "pink_pushpin",
-            "purple",
-            "purple_small",
-            "purple_dot",
-            "purple_pushpin",
-            "red ",
-            "red_small",
-            "red_dot",
-            "red_pushpin",
-            "red_big_stop",
-            "black_small",
-            "white_small"});
-            this.toolStripComboBox_simge.Name = "toolStripComboBox_simge";
-            this.toolStripComboBox_simge.Size = new System.Drawing.Size(121, 23);
+            this.toolStripMenuItem_simge.Enabled = false;
+            this.toolStripMenuItem_simge.Name = "toolStripMenuItem_simge";
+            this.toolStripMenuItem_simge.Size = new System.Drawing.Size(181, 22);
+            this.toolStripMenuItem_simge.Text = "Simge :";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 468);
+            this.ClientSize = new System.Drawing.Size(1184, 527);
             this.Controls.Add(this.statusStrip_harita);
             this.Controls.Add(this.statusStrip_durum);
             this.Controls.Add(this.groupBox_işaretler);
             this.Controls.Add(this.groupBox_ayarlar);
             this.Controls.Add(this.groupBox_koordinatlar);
             this.Controls.Add(this.groupBox_harita);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -422,6 +433,7 @@
             this.contextMenuStrip_harita.ResumeLayout(false);
             this.contextMenuStrip_işaret.ResumeLayout(false);
             this.groupBox_işaretler.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_işaretler)).EndInit();
             this.groupBox_ayarlar.ResumeLayout(false);
             this.groupBox_ayarlar.PerformLayout();
             this.groupBox_koordinatlar.ResumeLayout(false);
@@ -443,7 +455,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_işarethızlıekle;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_işaretekle;
         private System.Windows.Forms.GroupBox groupBox_işaretler;
-        private System.Windows.Forms.ListBox listBox_işaretler;
         private System.Windows.Forms.GroupBox groupBox_ayarlar;
         private System.Windows.Forms.ComboBox comboBox_sağlayıcılar;
         private System.Windows.Forms.Label label_mod;
@@ -468,6 +479,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator_ayıraç2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_işaretsil;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_simge;
+        private System.Windows.Forms.DataGridView dataGridView_işaretler;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_simge;
     }
 }
 

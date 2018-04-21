@@ -18,25 +18,30 @@ namespace Harita_Denemesi
 {
     public partial class Form1 : Form
     {
-        GMapOverlay kaplama;
         PointLatLng imleç_konum;
-        GMapMarker işaret;
+        GMapMarker işaretçi;
         public Form1()
-        {            
+        {
             InitializeComponent();
-            kaplama = new GMapOverlay();
             comboBox_sağlayıcılar.DataSource = GMapProviders.List;
             comboBox_sağlayıcılar.SelectedIndex = 1;
             comboBox_mod.SelectedIndex = 1;
-            kaplama.Markers.Add(new GMarkerGoogle(new PointLatLng(41.026699, 28.888663), GMarkerGoogleType.arrow));
-            kaplama.Markers.Add(new GMarkerGoogle(new PointLatLng(41.02609, 28.88806), GMarkerGoogleType.arrow));
+            toolStripComboBox_simge.SelectedIndex = 1;
             gMapControl1.DragButton = MouseButtons.Middle;
-            kaplama.Markers[0].ToolTipText = "Aquila";
-            kaplama.Markers[1].ToolTipText = "Orion";
-            gMapControl1.Overlays.Add(kaplama);
+            gMapControl1.Overlays.Add(İşaret.Kaplama);
+            İşaret.HaritayaKoy("Aquila", new PointLatLng(41.026699, 28.888663), GMarkerGoogleType.arrow);
+            İşaret.HaritayaKoy("Orion", new PointLatLng(41.02609, 28.88806), GMarkerGoogleType.arrow);
+            DataGridViewGüncelle();
             gMapControl1.SetPositionByKeywords("Yıldız Teknik Üniversitesi Davutpaşa İstanbul");
-            foreach (GMapMarker işaret in kaplama.Markers)
-                listBox_işaretler.Items.Add(işaret.ToolTipText + " " + işaret.Position.ToString());
+        }
+        private void DataGridViewGüncelle()
+        {
+            dataGridView_işaretler.DataSource = null;
+            dataGridView_işaretler.DataSource = İşaret.Liste;
+            dataGridView_işaretler.Columns[1].Width = 113;
+            dataGridView_işaretler.Columns[2].Width = 113;
+            dataGridView_işaretler.Columns[3].Width = 60;
+            this.Text = dataGridView_işaretler.AllowUserToAddRows.ToString();
         }
         private void button_bul_Click(object sender, EventArgs e)
         {
@@ -53,14 +58,9 @@ namespace Harita_Denemesi
         {
             GMaps.Instance.Mode = (AccessMode)comboBox_mod.SelectedIndex;
         }
-        private void listBox_işaretler_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox_işaretler.SelectedIndex != -1)
-                gMapControl1.Position = kaplama.Markers[listBox_işaretler.SelectedIndex].Position;
-        }
         private void gMapControl1_OnMarkerEnter(GMapMarker item)
         {
-            işaret = item;
+            işaretçi = item;
             gMapControl1.ContextMenuStrip = contextMenuStrip_işaret;
         }
         private void gMapControl1_OnMarkerLeave(GMapMarker item)
@@ -69,20 +69,17 @@ namespace Harita_Denemesi
         }
         private void ToolStripMenuItem_işarethızlıekle_Click(object sender, EventArgs e)
         {
-            string ad = "İşaret " + (kaplama.Markers.Count + 1);
-            kaplama.Markers.Add(new GMarkerGoogle(imleç_konum, GMarkerGoogleType.black_small));
-            kaplama.Markers[kaplama.Markers.Count - 1].ToolTipText = ad;
-            listBox_işaretler.Items.Add(ad + " " + kaplama.Markers[kaplama.Markers.Count - 1].Position.ToString());
+            İşaret.HaritayaKoy("İşaret " + (İşaret.Liste.Count + 1), imleç_konum, GMarkerGoogleType.black_small);
+            DataGridViewGüncelle();
             contextMenuStrip_harita.Close();
         }
         private void toolStripMenuItem_işaretekle_Click(object sender, EventArgs e)
         {
-            string ad = Interaction.InputBox("İşaret Adı:", "İşaret Ekle", "İşaret " + (kaplama.Markers.Count + 1));
+            string ad = Interaction.InputBox("İşaret Adı:", "İşaret Ekle", "İşaret " + (İşaret.Liste.Count + 1));
             if (ad != "")
             {
-                kaplama.Markers.Add(new GMarkerGoogle(imleç_konum, (GMarkerGoogleType)toolStripComboBox_simge.SelectedIndex));
-                kaplama.Markers[kaplama.Markers.Count - 1].ToolTipText = ad;
-                listBox_işaretler.Items.Add(ad + " " + kaplama.Markers[kaplama.Markers.Count - 1].Position.ToString());
+                İşaret.HaritayaKoy(ad, imleç_konum, (GMarkerGoogleType)toolStripComboBox_simge.SelectedIndex);
+                DataGridViewGüncelle();
             }
         }
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
@@ -92,14 +89,13 @@ namespace Harita_Denemesi
         }
         private void contextMenuStrip_işaret_Opening(object sender, CancelEventArgs e)
         {
-            toolStripMenuItem_işaret_başlık.Text = işaret.ToolTipText + " Ayarları";
+            toolStripMenuItem_işaret_başlık.Text = işaretçi.ToolTipText + " Ayarları";
         }
         private void toolStripMenuItem_işaretsil_Click(object sender, EventArgs e)
         {
-            int i = kaplama.Markers.IndexOf(işaret);
-            kaplama.Markers.Remove(işaret);
-            listBox_işaretler.Items.RemoveAt(i);
+            İşaret.HaritadanYokEt(İşaret.Kaplama.Markers.IndexOf(işaretçi));
             gMapControl1.ContextMenuStrip = contextMenuStrip_harita;
+            DataGridViewGüncelle();
         }
     }
 }
