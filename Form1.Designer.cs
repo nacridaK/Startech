@@ -34,6 +34,7 @@
             this.toolStripSeparator_ayıraç1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_işarethızlıekle = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_işaretekle = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_simge = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox_simge = new System.Windows.Forms.ToolStripComboBox();
             this.contextMenuStrip_işaret = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_işaret_başlık = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,12 +48,12 @@
             this.label_sağlayıcı = new System.Windows.Forms.Label();
             this.comboBox_mod = new System.Windows.Forms.ComboBox();
             this.groupBox_koordinatlar = new System.Windows.Forms.GroupBox();
-            this.textBox_keyword = new System.Windows.Forms.TextBox();
+            this.textBox_arama = new System.Windows.Forms.TextBox();
             this.label_enlem = new System.Windows.Forms.Label();
             this.label_boylam = new System.Windows.Forms.Label();
             this.button_bul = new System.Windows.Forms.Button();
-            this.textBox_latitude = new System.Windows.Forms.TextBox();
-            this.textBox_longitude = new System.Windows.Forms.TextBox();
+            this.textBox_enlem = new System.Windows.Forms.TextBox();
+            this.textBox_boylam = new System.Windows.Forms.TextBox();
             this.label_ara = new System.Windows.Forms.Label();
             this.groupBox_harita = new System.Windows.Forms.GroupBox();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
@@ -60,7 +61,6 @@
             this.toolStripStatusLabel_durum = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip_harita = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_imleç = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripMenuItem_simge = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_harita.SuspendLayout();
             this.contextMenuStrip_işaret.SuspendLayout();
             this.groupBox_işaretler.SuspendLayout();
@@ -80,7 +80,7 @@
             this.toolStripMenuItem_işarethızlıekle});
             this.contextMenuStrip_harita.Name = "contextMenuStrip1";
             this.contextMenuStrip_harita.ShowImageMargin = false;
-            this.contextMenuStrip_harita.Size = new System.Drawing.Size(128, 76);
+            this.contextMenuStrip_harita.Size = new System.Drawing.Size(128, 54);
             // 
             // toolStripMenuItem_harita_başlık
             // 
@@ -111,6 +111,13 @@
             this.toolStripMenuItem_işaretekle.Size = new System.Drawing.Size(181, 22);
             this.toolStripMenuItem_işaretekle.Text = "İşaret Ekle";
             this.toolStripMenuItem_işaretekle.Click += new System.EventHandler(this.toolStripMenuItem_işaretekle_Click);
+            // 
+            // toolStripMenuItem_simge
+            // 
+            this.toolStripMenuItem_simge.Enabled = false;
+            this.toolStripMenuItem_simge.Name = "toolStripMenuItem_simge";
+            this.toolStripMenuItem_simge.Size = new System.Drawing.Size(181, 22);
+            this.toolStripMenuItem_simge.Text = "Simge :";
             // 
             // toolStripComboBox_simge
             // 
@@ -167,6 +174,7 @@
             this.contextMenuStrip_işaret.ShowImageMargin = false;
             this.contextMenuStrip_işaret.Size = new System.Drawing.Size(96, 54);
             this.contextMenuStrip_işaret.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_işaret_Opening);
+            this.contextMenuStrip_işaret.MouseClick += new System.Windows.Forms.MouseEventHandler(this.contextMenuStrip_işaret_MouseClick);
             // 
             // toolStripMenuItem_işaret_başlık
             // 
@@ -263,12 +271,12 @@
             // 
             // groupBox_koordinatlar
             // 
-            this.groupBox_koordinatlar.Controls.Add(this.textBox_keyword);
+            this.groupBox_koordinatlar.Controls.Add(this.textBox_arama);
             this.groupBox_koordinatlar.Controls.Add(this.label_enlem);
             this.groupBox_koordinatlar.Controls.Add(this.label_boylam);
             this.groupBox_koordinatlar.Controls.Add(this.button_bul);
-            this.groupBox_koordinatlar.Controls.Add(this.textBox_latitude);
-            this.groupBox_koordinatlar.Controls.Add(this.textBox_longitude);
+            this.groupBox_koordinatlar.Controls.Add(this.textBox_enlem);
+            this.groupBox_koordinatlar.Controls.Add(this.textBox_boylam);
             this.groupBox_koordinatlar.Controls.Add(this.label_ara);
             this.groupBox_koordinatlar.Location = new System.Drawing.Point(589, 12);
             this.groupBox_koordinatlar.Name = "groupBox_koordinatlar";
@@ -277,17 +285,18 @@
             this.groupBox_koordinatlar.TabStop = false;
             this.groupBox_koordinatlar.Text = "Koordinatlar";
             // 
-            // textBox_keyword
+            // textBox_arama
             // 
-            this.textBox_keyword.Location = new System.Drawing.Point(6, 68);
-            this.textBox_keyword.Name = "textBox_keyword";
-            this.textBox_keyword.Size = new System.Drawing.Size(100, 20);
-            this.textBox_keyword.TabIndex = 7;
+            this.textBox_arama.Location = new System.Drawing.Point(6, 68);
+            this.textBox_arama.Name = "textBox_arama";
+            this.textBox_arama.Size = new System.Drawing.Size(111, 20);
+            this.textBox_arama.TabIndex = 7;
+            this.textBox_arama.Text = "Kontrol ve Otomasyon";
             // 
             // label_enlem
             // 
             this.label_enlem.AutoSize = true;
-            this.label_enlem.Location = new System.Drawing.Point(109, 22);
+            this.label_enlem.Location = new System.Drawing.Point(123, 22);
             this.label_enlem.Name = "label_enlem";
             this.label_enlem.Size = new System.Drawing.Size(35, 13);
             this.label_enlem.TabIndex = 2;
@@ -296,7 +305,7 @@
             // label_boylam
             // 
             this.label_boylam.AutoSize = true;
-            this.label_boylam.Location = new System.Drawing.Point(109, 49);
+            this.label_boylam.Location = new System.Drawing.Point(123, 49);
             this.label_boylam.Name = "label_boylam";
             this.label_boylam.Size = new System.Drawing.Size(40, 13);
             this.label_boylam.TabIndex = 3;
@@ -312,24 +321,24 @@
             this.button_bul.UseVisualStyleBackColor = true;
             this.button_bul.Click += new System.EventHandler(this.button_bul_Click);
             // 
-            // textBox_latitude
+            // textBox_enlem
             // 
-            this.textBox_latitude.Location = new System.Drawing.Point(6, 15);
-            this.textBox_latitude.Name = "textBox_latitude";
-            this.textBox_latitude.Size = new System.Drawing.Size(100, 20);
-            this.textBox_latitude.TabIndex = 4;
+            this.textBox_enlem.Location = new System.Drawing.Point(6, 15);
+            this.textBox_enlem.Name = "textBox_enlem";
+            this.textBox_enlem.Size = new System.Drawing.Size(111, 20);
+            this.textBox_enlem.TabIndex = 4;
             // 
-            // textBox_longitude
+            // textBox_boylam
             // 
-            this.textBox_longitude.Location = new System.Drawing.Point(6, 42);
-            this.textBox_longitude.Name = "textBox_longitude";
-            this.textBox_longitude.Size = new System.Drawing.Size(100, 20);
-            this.textBox_longitude.TabIndex = 5;
+            this.textBox_boylam.Location = new System.Drawing.Point(6, 42);
+            this.textBox_boylam.Name = "textBox_boylam";
+            this.textBox_boylam.Size = new System.Drawing.Size(111, 20);
+            this.textBox_boylam.TabIndex = 5;
             // 
             // label_ara
             // 
             this.label_ara.AutoSize = true;
-            this.label_ara.Location = new System.Drawing.Point(109, 75);
+            this.label_ara.Location = new System.Drawing.Point(123, 75);
             this.label_ara.Name = "label_ara";
             this.label_ara.Size = new System.Drawing.Size(22, 13);
             this.label_ara.TabIndex = 6;
@@ -350,6 +359,7 @@
             this.gMapControl1.Bearing = 0F;
             this.gMapControl1.CanDragMap = true;
             this.gMapControl1.ContextMenuStrip = this.contextMenuStrip_harita;
+            this.gMapControl1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.gMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
             this.gMapControl1.GrayScaleMode = false;
@@ -357,8 +367,8 @@
             this.gMapControl1.LevelsKeepInMemmory = 5;
             this.gMapControl1.Location = new System.Drawing.Point(3, 16);
             this.gMapControl1.MarkersEnabled = true;
-            this.gMapControl1.MaxZoom = 18;
-            this.gMapControl1.MinZoom = 2;
+            this.gMapControl1.MaxZoom = 19;
+            this.gMapControl1.MinZoom = 1;
             this.gMapControl1.MouseWheelZoomEnabled = true;
             this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
             this.gMapControl1.Name = "gMapControl1";
@@ -371,7 +381,7 @@
             this.gMapControl1.ShowTileGridLines = false;
             this.gMapControl1.Size = new System.Drawing.Size(565, 392);
             this.gMapControl1.TabIndex = 0;
-            this.gMapControl1.Zoom = 18D;
+            this.gMapControl1.Zoom = 19D;
             this.gMapControl1.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl1_OnMarkerEnter);
             this.gMapControl1.OnMarkerLeave += new GMap.NET.WindowsForms.MarkerLeave(this.gMapControl1_OnMarkerLeave);
             this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
@@ -406,13 +416,6 @@
             this.toolStripStatusLabel_imleç.Name = "toolStripStatusLabel_imleç";
             this.toolStripStatusLabel_imleç.Size = new System.Drawing.Size(101, 17);
             this.toolStripStatusLabel_imleç.Text = "İmleçin Konumu: ";
-            // 
-            // toolStripMenuItem_simge
-            // 
-            this.toolStripMenuItem_simge.Enabled = false;
-            this.toolStripMenuItem_simge.Name = "toolStripMenuItem_simge";
-            this.toolStripMenuItem_simge.Size = new System.Drawing.Size(181, 22);
-            this.toolStripMenuItem_simge.Text = "Simge :";
             // 
             // Form1
             // 
@@ -461,12 +464,12 @@
         private System.Windows.Forms.Label label_sağlayıcı;
         private System.Windows.Forms.ComboBox comboBox_mod;
         private System.Windows.Forms.GroupBox groupBox_koordinatlar;
-        private System.Windows.Forms.TextBox textBox_keyword;
+        private System.Windows.Forms.TextBox textBox_arama;
         private System.Windows.Forms.Label label_enlem;
         private System.Windows.Forms.Label label_boylam;
         private System.Windows.Forms.Button button_bul;
-        private System.Windows.Forms.TextBox textBox_latitude;
-        private System.Windows.Forms.TextBox textBox_longitude;
+        private System.Windows.Forms.TextBox textBox_enlem;
+        private System.Windows.Forms.TextBox textBox_boylam;
         private System.Windows.Forms.Label label_ara;
         private System.Windows.Forms.GroupBox groupBox_harita;
         private GMap.NET.WindowsForms.GMapControl gMapControl1;

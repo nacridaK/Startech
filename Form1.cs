@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GMap.NET;
-using GMap.NET.ObjectModel;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.MapProviders;
@@ -23,32 +16,32 @@ namespace Harita_Denemesi
         public Form1()
         {
             InitializeComponent();
+            Text += " v" + Application.ProductVersion;
             comboBox_sağlayıcılar.DataSource = GMapProviders.List;
             comboBox_sağlayıcılar.SelectedIndex = 1;
             comboBox_mod.SelectedIndex = 1;
             toolStripComboBox_simge.SelectedIndex = 1;
             gMapControl1.DragButton = MouseButtons.Middle;
             gMapControl1.Overlays.Add(İşaret.Kaplama);
-            İşaret.HaritayaKoy("Aquila", new PointLatLng(41.026699, 28.888663), GMarkerGoogleType.arrow);
-            İşaret.HaritayaKoy("Orion", new PointLatLng(41.02609, 28.88806), GMarkerGoogleType.arrow);
+            İşaret.HaritayaKoy("Orion", new PointLatLng(41.029198242468411, 28.889928460121155), GMarkerGoogleType.arrow);
+            İşaret.HaritayaKoy("Aquila", new PointLatLng(41.029275131313071, 28.889638781547546), GMarkerGoogleType.arrow);
             DataGridViewGüncelle();
-            gMapControl1.SetPositionByKeywords("Yıldız Teknik Üniversitesi Davutpaşa İstanbul");
+            dataGridView_işaretler.Columns[1].Width = 113;
+            dataGridView_işaretler.Columns[2].Width = 113;
+            dataGridView_işaretler.Columns[3].Width = 60;
+            gMapControl1.SetPositionByKeywords(textBox_arama.Text);
         }
         private void DataGridViewGüncelle()
         {
             dataGridView_işaretler.DataSource = null;
             dataGridView_işaretler.DataSource = İşaret.Liste;
-            dataGridView_işaretler.Columns[1].Width = 113;
-            dataGridView_işaretler.Columns[2].Width = 113;
-            dataGridView_işaretler.Columns[3].Width = 60;
-            this.Text = dataGridView_işaretler.AllowUserToAddRows.ToString();
         }
         private void button_bul_Click(object sender, EventArgs e)
         {
-            if (textBox_latitude.Text != String.Empty && textBox_longitude.Text != String.Empty)
-                gMapControl1.Position = new PointLatLng(Double.Parse(textBox_latitude.Text), Double.Parse(textBox_longitude.Text));
-            if (textBox_keyword.Text != String.Empty)
-                gMapControl1.SetPositionByKeywords(textBox_keyword.Text);
+            if (textBox_enlem.Text != String.Empty && textBox_boylam.Text != String.Empty)
+                gMapControl1.Position = new PointLatLng(Double.Parse(textBox_enlem.Text), Double.Parse(textBox_boylam.Text));
+            if (textBox_arama.Text != String.Empty)
+                gMapControl1.SetPositionByKeywords(textBox_arama.Text);
         }
         private void comboBox_sağlayıcılar_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -87,15 +80,27 @@ namespace Harita_Denemesi
             imleç_konum = gMapControl1.FromLocalToLatLng(e.X, e.Y);
             toolStripStatusLabel_imleç.Text = "İmleçin Konumu: " + imleç_konum.ToString();
         }
+        private void contextMenuStrip_işaret_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                İşaretSil();
+                contextMenuStrip_işaret.Close();
+            }
+        }
         private void contextMenuStrip_işaret_Opening(object sender, CancelEventArgs e)
         {
             toolStripMenuItem_işaret_başlık.Text = işaretçi.ToolTipText + " Ayarları";
         }
-        private void toolStripMenuItem_işaretsil_Click(object sender, EventArgs e)
+        private void İşaretSil()
         {
             İşaret.HaritadanYokEt(İşaret.Kaplama.Markers.IndexOf(işaretçi));
             gMapControl1.ContextMenuStrip = contextMenuStrip_harita;
             DataGridViewGüncelle();
+        }
+        private void toolStripMenuItem_işaretsil_Click(object sender, EventArgs e)
+        {
+            İşaretSil();
         }
     }
 }

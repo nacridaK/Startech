@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using GMap.NET;
-using GMap.NET.ObjectModel;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 
@@ -53,8 +47,7 @@ namespace Harita_Denemesi
         public void HaritadanSil()
         {
             int i = liste.IndexOf(this);
-            kaplama.Markers.RemoveAt(i);
-            liste.RemoveAt(i);
+            HaritadanYokEt(i);
         }
         public static void HaritayaKoy(string Ad, PointLatLng konum, GMarkerGoogleType tip)
         {
