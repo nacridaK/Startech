@@ -42,6 +42,7 @@
             this.toolStripMenuItem_işaretsil = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox_işaretler = new System.Windows.Forms.GroupBox();
             this.dataGridView_işaretler = new System.Windows.Forms.DataGridView();
+            this.silDataGridViewButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox_ayarlar = new System.Windows.Forms.GroupBox();
             this.comboBox_sağlayıcılar = new System.Windows.Forms.ComboBox();
             this.label_mod = new System.Windows.Forms.Label();
@@ -61,6 +62,11 @@
             this.toolStripStatusLabel_durum = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip_harita = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_imleç = new System.Windows.Forms.ToolStripStatusLabel();
+            this.adDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enlemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.boylamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.görünürlükDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.işaretBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip_harita.SuspendLayout();
             this.contextMenuStrip_işaret.SuspendLayout();
             this.groupBox_işaretler.SuspendLayout();
@@ -70,6 +76,7 @@
             this.groupBox_harita.SuspendLayout();
             this.statusStrip_durum.SuspendLayout();
             this.statusStrip_harita.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.işaretBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip_harita
@@ -207,12 +214,30 @@
             // 
             // dataGridView_işaretler
             // 
+            this.dataGridView_işaretler.AutoGenerateColumns = false;
             this.dataGridView_işaretler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_işaretler.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.adDataGridViewTextBoxColumn,
+            this.enlemDataGridViewTextBoxColumn,
+            this.boylamDataGridViewTextBoxColumn,
+            this.görünürlükDataGridViewCheckBoxColumn,
+            this.silDataGridViewButtonColumn});
+            this.dataGridView_işaretler.DataSource = this.işaretBindingSource;
             this.dataGridView_işaretler.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_işaretler.Location = new System.Drawing.Point(3, 16);
             this.dataGridView_işaretler.Name = "dataGridView_işaretler";
             this.dataGridView_işaretler.Size = new System.Drawing.Size(577, 266);
             this.dataGridView_işaretler.TabIndex = 26;
+            this.dataGridView_işaretler.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_işaretler_RowHeaderMouseDoubleClick);
+            // 
+            // silDataGridViewButtonColumn
+            // 
+            this.silDataGridViewButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.silDataGridViewButtonColumn.HeaderText = "Sil";
+            this.silDataGridViewButtonColumn.Name = "silDataGridViewButtonColumn";
+            this.silDataGridViewButtonColumn.Text = "İşaret Sil";
+            this.silDataGridViewButtonColumn.UseColumnTextForButtonValue = true;
+            this.silDataGridViewButtonColumn.Width = 24;
             // 
             // groupBox_ayarlar
             // 
@@ -417,6 +442,43 @@
             this.toolStripStatusLabel_imleç.Size = new System.Drawing.Size(101, 17);
             this.toolStripStatusLabel_imleç.Text = "İmleçin Konumu: ";
             // 
+            // adDataGridViewTextBoxColumn
+            // 
+            this.adDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.adDataGridViewTextBoxColumn.DataPropertyName = "Ad";
+            this.adDataGridViewTextBoxColumn.HeaderText = "Ad";
+            this.adDataGridViewTextBoxColumn.Name = "adDataGridViewTextBoxColumn";
+            this.adDataGridViewTextBoxColumn.Width = 45;
+            // 
+            // enlemDataGridViewTextBoxColumn
+            // 
+            this.enlemDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.enlemDataGridViewTextBoxColumn.DataPropertyName = "Enlem";
+            this.enlemDataGridViewTextBoxColumn.HeaderText = "Enlem";
+            this.enlemDataGridViewTextBoxColumn.Name = "enlemDataGridViewTextBoxColumn";
+            this.enlemDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // boylamDataGridViewTextBoxColumn
+            // 
+            this.boylamDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.boylamDataGridViewTextBoxColumn.DataPropertyName = "Boylam";
+            this.boylamDataGridViewTextBoxColumn.HeaderText = "Boylam";
+            this.boylamDataGridViewTextBoxColumn.Name = "boylamDataGridViewTextBoxColumn";
+            this.boylamDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // görünürlükDataGridViewCheckBoxColumn
+            // 
+            this.görünürlükDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.görünürlükDataGridViewCheckBoxColumn.DataPropertyName = "Görünürlük";
+            this.görünürlükDataGridViewCheckBoxColumn.HeaderText = "Görünürlük";
+            this.görünürlükDataGridViewCheckBoxColumn.Name = "görünürlükDataGridViewCheckBoxColumn";
+            this.görünürlükDataGridViewCheckBoxColumn.Width = 65;
+            // 
+            // işaretBindingSource
+            // 
+            this.işaretBindingSource.AllowNew = true;
+            this.işaretBindingSource.DataSource = typeof(Harita_Denemesi.İşaret);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,6 +508,7 @@
             this.statusStrip_durum.PerformLayout();
             this.statusStrip_harita.ResumeLayout(false);
             this.statusStrip_harita.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.işaretBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,6 +547,12 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox_simge;
         private System.Windows.Forms.DataGridView dataGridView_işaretler;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_simge;
+        private System.Windows.Forms.BindingSource işaretBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn adDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn enlemDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn boylamDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn görünürlükDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn silDataGridViewButtonColumn;
     }
 }
 

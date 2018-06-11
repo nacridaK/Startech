@@ -25,16 +25,13 @@ namespace Harita_Denemesi
             gMapControl1.Overlays.Add(İşaret.Kaplama);
             İşaret.HaritayaKoy("Orion", new PointLatLng(41.029198242468411, 28.889928460121155), GMarkerGoogleType.arrow);
             İşaret.HaritayaKoy("Aquila", new PointLatLng(41.029275131313071, 28.889638781547546), GMarkerGoogleType.arrow);
-            DataGridViewGüncelle();
-            dataGridView_işaretler.Columns[1].Width = 113;
-            dataGridView_işaretler.Columns[2].Width = 113;
-            dataGridView_işaretler.Columns[3].Width = 60;
+            işaretBindingSource.DataSource = İşaret.Liste;
             gMapControl1.SetPositionByKeywords(textBox_arama.Text);
         }
         private void DataGridViewGüncelle()
         {
-            dataGridView_işaretler.DataSource = null;
-            dataGridView_işaretler.DataSource = İşaret.Liste;
+            işaretBindingSource.DataSource = null;
+            işaretBindingSource.DataSource = İşaret.Liste;
         }
         private void button_bul_Click(object sender, EventArgs e)
         {
@@ -85,6 +82,7 @@ namespace Harita_Denemesi
             if (e.Button == MouseButtons.Right)
             {
                 İşaretSil();
+                DataGridViewGüncelle();
                 contextMenuStrip_işaret.Close();
             }
         }
@@ -95,12 +93,17 @@ namespace Harita_Denemesi
         private void İşaretSil()
         {
             İşaret.HaritadanYokEt(İşaret.Kaplama.Markers.IndexOf(işaretçi));
-            gMapControl1.ContextMenuStrip = contextMenuStrip_harita;
             DataGridViewGüncelle();
+            gMapControl1.ContextMenuStrip = contextMenuStrip_harita;
         }
         private void toolStripMenuItem_işaretsil_Click(object sender, EventArgs e)
         {
             İşaretSil();
+            DataGridViewGüncelle();
+        }
+        private void dataGridView_işaretler_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            gMapControl1.Position = İşaret.Kaplama.Markers[e.RowIndex].Position;
         }
     }
 }
