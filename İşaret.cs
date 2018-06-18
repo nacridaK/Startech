@@ -15,8 +15,8 @@ namespace Harita_Denemesi
             get => liste;
             set => liste = value;
         }
-        private static GMapOverlay kaplama = new GMapOverlay();
-        public static GMapOverlay Kaplama => kaplama;
+        private static GMapOverlay katman = new GMapOverlay();
+        public static GMapOverlay Katman => katman;
         public string Ad
         {
             get => işaret.ToolTipText;
@@ -54,7 +54,7 @@ namespace Harita_Denemesi
             işaret.ToolTip.Foreground = Brushes.Teal;
             işaret.ToolTip.Stroke = Pens.Navy;
             işaret.ToolTip.TextPadding = new Size(10, 2);
-            kaplama.Markers.Add(işaret);
+            katman.Markers.Add(işaret);
             liste.Add(this);
         }
         public void HaritadanSil()
@@ -62,14 +62,31 @@ namespace Harita_Denemesi
             int i = liste.IndexOf(this);
             HaritadanYokEt(i);
         }
+        public static string AdıGetir(int i)
+        {
+            return katman.Markers[i].ToolTipText;
+        }
+        public static int NumarayıGetir(GMapMarker işaretçi)
+        {
+            return katman.Markers.IndexOf(işaretçi);
+        }
+        public static PointLatLng PozisyonuGetir(int i)
+        {
+            return katman.Markers[i].Position;
+        }
         public static void HaritayaKoy(string Ad, PointLatLng konum, GMarkerGoogleType tip)
         {
             new İşaret(Ad, konum, tip).HaritayaEkle();
         }
         public static void HaritadanYokEt(int i)
         {
-            kaplama.Markers.RemoveAt(i);
+            katman.Markers.RemoveAt(i);
             liste.RemoveAt(i);
+        }
+        public static void HaritadanYokEt(GMapMarker işaretçi)
+        {
+            int i = NumarayıGetir(işaretçi);
+            HaritadanYokEt(i);
         }
     }
 }
