@@ -8,6 +8,7 @@ using GMap.NET.WindowsForms.Markers;
 using GMap.NET.MapProviders;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Harita_Denemesi
 {
@@ -15,6 +16,7 @@ namespace Harita_Denemesi
     {
         Queue<byte[]> s_enlem = new Queue<byte[]>();
         Queue<byte[]> s_boylam = new Queue<byte[]>();
+        byte[][] koordinat = new byte[2][];
         PointLatLng imleç_konum;
         GMapMarker işaretçi;
         public Form1()
@@ -31,8 +33,10 @@ namespace Harita_Denemesi
             İşaret.HaritayaKoy("Aquila", new PointLatLng(41.029275131313071, 28.889638781547546), GMarkerGoogleType.arrow);
             işaretBindingSource.DataSource = İşaret.Liste;
             gMapControl1.SetPositionByKeywords(textBox_arama.Text);
-            Console.WriteLine(gMapControl1.CacheLocation);
+            koordinat[0] = new byte[4];
+            koordinat[1] = new byte[4];
             seriport.Open();
+            seriport.DiscardInBuffer();
         }
         private void my_DataGridViewGüncelle()
         {
@@ -145,23 +149,23 @@ namespace Harita_Denemesi
             gMapControl1.Zoom = 19;
             my_DurumGüncelle(item.ToolTipText + " işareti merkezlendi.");
         }
+        async Task<float[]> VeriOku()
+        {
+            await seriport.BaseStream.ReadAsync(koordinat[0], 0, 4);
+            await seriport.BaseStream.ReadAsync(koordinat[1], 0, 4);
+            float[] flt = { BitConverter.ToSingle(koordinat[0], 0), BitConverter.ToSingle(koordinat[1], 0) };
+            return flt;
+        }
         private void seriport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            byte[] enlem = new byte[8];
-            byte[] boylam = new byte[8];
-            seriport.Read(enlem, 0, 8);
-            seriport.Read(boylam, 0, 8);
-            s_enlem.Enqueue(enlem);
-            s_boylam.Enqueue(boylam);
-            backgroundWorker_işaretler.RunWorkerAsync();
+            ////seriport.Read(enlem, 0, 4);
+            ////seriport.Read(boylam, 0, 4);
+            //seriport.BaseStream.ReadAsync(koordinat[0], 0, 4);
+            //seriport.BaseStream.ReadAsync(koordinat[1], 0, 4);
+            //float enl = BitConverter.ToSingle(koordinat[0], 0);
+            //float byl = BitConverter.ToSingle(koordinat[1], 0);
+            ////İşaret.HaritayaKoy("Yasin", new PointLatLng(enl, byl), GMarkerGoogleType.arrow);
             //Console.WriteLine(enl + " " + byl);
-            //İşaret.HaritayaKoy("Yasin", new PointLatLng(enl, byl), GMarkerGoogleType.arrow);
-        }
-        private void backgroundWorker_işaretler_DoWork(object sender, DoWorkEventArgs e)
-        {
-            double[] koordinatlar = { BitConverter.ToDouble(s_enlem.Dequeue(), 0), BitConverter.ToDouble(s_boylam.Dequeue(), 0) };
-            Console.WriteLine(koordinatlar[0] + " " + koordinatlar[1]);
-            //İşaret.HaritayaKoy("Yasin", new PointLatLng(enlem, boylam), GMarkerGoogleType.arrow);
         }
     }
 }
