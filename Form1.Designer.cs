@@ -64,6 +64,8 @@
             this.toolStripStatusLabel_durum = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip_harita = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_imleç = new System.Windows.Forms.ToolStripStatusLabel();
+            this.zamanlayıcı = new System.Windows.Forms.Timer(this.components);
+            this.button_zamanlayıcı = new System.Windows.Forms.Button();
             this.adDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.enlemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boylamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,8 +227,9 @@
             // 
             // seriport
             // 
+            this.seriport.BaudRate = 115200;
             this.seriport.DtrEnable = true;
-            this.seriport.PortName = "COM8";
+            this.seriport.PortName = "COM3";
             this.seriport.ReceivedBytesThreshold = 8;
             this.seriport.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.seriport_DataReceived);
             // 
@@ -462,6 +465,21 @@
             this.toolStripStatusLabel_imleç.Size = new System.Drawing.Size(101, 17);
             this.toolStripStatusLabel_imleç.Text = "İmleçin Konumu: ";
             // 
+            // zamanlayıcı
+            // 
+            this.zamanlayıcı.Interval = 1;
+            this.zamanlayıcı.Tick += new System.EventHandler(this.zamanlayıcı_Tick);
+            // 
+            // button_zamanlayıcı
+            // 
+            this.button_zamanlayıcı.Location = new System.Drawing.Point(761, 105);
+            this.button_zamanlayıcı.Name = "button_zamanlayıcı";
+            this.button_zamanlayıcı.Size = new System.Drawing.Size(75, 23);
+            this.button_zamanlayıcı.TabIndex = 26;
+            this.button_zamanlayıcı.Text = "Zamanlayıcı";
+            this.button_zamanlayıcı.UseVisualStyleBackColor = true;
+            this.button_zamanlayıcı.Click += new System.EventHandler(this.button_zamanlayıcı_Click);
+            // 
             // adDataGridViewTextBoxColumn
             // 
             this.adDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -504,6 +522,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 527);
+            this.Controls.Add(this.button_zamanlayıcı);
             this.Controls.Add(this.statusStrip_harita);
             this.Controls.Add(this.statusStrip_durum);
             this.Controls.Add(this.groupBox_işaretler);
@@ -575,6 +594,8 @@
         private System.Windows.Forms.DataGridViewButtonColumn silDataGridViewButtonColumn;
         private System.IO.Ports.SerialPort seriport;
         private System.Windows.Forms.PropertyGrid propertyGrid_seriport;
+        private System.Windows.Forms.Timer zamanlayıcı;
+        private System.Windows.Forms.Button button_zamanlayıcı;
     }
 }
 
